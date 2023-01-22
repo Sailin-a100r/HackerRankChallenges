@@ -12,7 +12,8 @@ function climbingLeaderboard(ranked, player) {
     // Write your code here
     const set = new Set(ranked)
     let result = []
-
+    //change between set and array another way is
+    // ranked = Array.from(set);
     ranked = [...set]
 
     player.forEach(element => {
