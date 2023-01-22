@@ -1,5 +1,4 @@
 
-
 /*
  * Complete the 'climbingLeaderboard' function below.
  *
@@ -11,48 +10,30 @@
 
 function climbingLeaderboard(ranked, player) {
     // Write your code here
-    let playerRank = [];
-    // let searchIndex = -1 ;
+    const set = new Set(ranked)
+    let result = []
 
-    //const rankedSet = new Set(ranked);
-    let rankedArr = ranked;
+    ranked = [...set]
 
-    for (let i = 0; i < player.length ; i++) {
+    player.forEach(element => {
+       for (let i = ranked.length-1; i > 0 ; i--) {
+                if (ranked[i] == element) {
+                    result.push(i + 1)
+                    ranked.splice(i)
+                    return 
+                } else if (ranked[i] > element) {
+                    result.push(i+2)
+                    ranked.splice(i + 1)
+                    return 
+                }
+        } 
+        
+        result.push(1);   
+    });
 
-        // console.log(`1-Ranked Array: ${rankedArr}`);
-        // console.log(`-------------------------------`);
-
-        rankedArr.push(player[i])
-
-        let rankedSet = new Set(rankedArr);
-        rankedArr = []
-
-        rankedSet.forEach(value => {
-            rankedArr.push(value)
-        });
-
-        rankedArr.sort((a, b) => b - a)
-
-        // console.log(`Ranked Array: ${rankedArr}`);
-        // console.log(`-------------------------------`);
-
-        const place = rankedArr.lastIndexOf(player[i])
-        // console.log(`place is: ${place}`);
-        // console.log(`-------------------------------`);
-
-        playerRank.push(+place + 1)
-
-        rankedArr.splice(+place, rankedArr.length - +place -2)
-
-        // console.log(`ranked Arr: ${rankedArr}`);
-        // console.log(`-------------------------------`);
-
-    }
-
-    return playerRank;
+    return result;
 
 }
-
 let ranked = [100, 100, 50, 40, 40, 20, 10]
 
 let player = [2, 25, 50, 120]
